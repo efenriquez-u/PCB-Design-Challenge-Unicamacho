@@ -806,6 +806,128 @@
             transform: translateY(0);
         }
 
+        /* Estilos para el Video Preview */
+        .video-preview {
+            background: linear-gradient(45deg, #000924 0%, #001a4d 100%);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .video-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 59, 150, 0.2);
+            border-color: rgba(0, 255, 255, 0.3);
+        }
+
+        .video-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 49%, rgba(0, 255, 255, 0.1) 50%, transparent 51%) 0 0/50px,
+                linear-gradient(0deg, transparent 49%, rgba(0, 255, 255, 0.1) 50%, transparent 51%) 0 0/50px;
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        .video-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px 20px;
+        }
+
+        .video-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .video-icon::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            70% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        .video-title {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .video-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 25px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .video-status {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 20px;
+            color: #00ffff;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 15px;
+        }
+
+        .video-progress {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 15px auto;
+            overflow: hidden;
+        }
+
+        .video-progress-bar {
+            width: 75%;
+            height: 100%;
+            background: #00ffff;
+            animation: progress 2s ease-in-out infinite;
+        }
+
+        @keyframes progress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
         .close-modal {
             position: absolute;
             right: 20px;
@@ -996,7 +1118,7 @@
                         <div class="materials-section">
                             <h4 style="margin-bottom: 15px;">Materiales Compartidos</h4>
                             <a href="#" class="btn-secondary" onclick="openMaterialsModal()">Ver Recursos Compartidos</a>
-                            <a href="#" class="btn-secondary" onclick="alert('Video próximamente disponible')">Ver Grabación</a>
+                            <a href="#" class="btn-secondary" onclick="openVideoModal()">Ver Grabación</a>
                         </div>
                     </div>
 
@@ -1140,7 +1262,7 @@
                     </div>
 
                     <div class="conference-item">
-                        <h3>Caso empresarial Microcircuitos-Cali</h3>
+                        <h3>Caso empresarial Microcircuitos - BI KON - Cali</h3>
                         <p class="conference-speaker">Representante Microcircuitos</p>
                     </div>
                 </div>
@@ -1273,6 +1395,33 @@
         </div>
     </footer>
 
+    <!-- Modal del Video -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content" style="background: #000924; max-width: 700px;">
+            <span class="close-modal" onclick="closeVideoModal()" style="color: #fff;">&times;</span>
+            <div class="video-preview">
+                <div class="video-content">
+                    <div class="video-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 5v14l11-7z" fill="#00ffff"/>
+                        </svg>
+                    </div>
+                    <h3 class="video-title">Capacitación Virtual - Diseño de PCB</h3>
+                    <p class="video-description">
+                        Grabación de la sesión del 30 de Octubre sobre diseño y prototipado electrónico.
+                        Incluye demostraciones prácticas y mejores prácticas de diseño.
+                    </p>
+                    <div class="video-progress">
+                        <div class="video-progress-bar"></div>
+                    </div>
+                    <div class="video-status">
+                        Procesando... Disponible pronto
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal de Materiales -->
     <div id="materialsModal" class="modal">
         <div class="modal-content">
@@ -1322,11 +1471,26 @@
             document.body.style.overflow = '';
         }
 
-        // Cerrar modal al hacer clic fuera
+        function openVideoModal() {
+            document.getElementById('videoModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            document.getElementById('videoModal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        // Cerrar modales al hacer clic fuera
         window.onclick = function(event) {
-            let modal = document.getElementById('materialsModal');
-            if (event.target == modal) {
+            let materialsModal = document.getElementById('materialsModal');
+            let videoModal = document.getElementById('videoModal');
+            
+            if (event.target == materialsModal) {
                 closeMaterialsModal();
+            }
+            if (event.target == videoModal) {
+                closeVideoModal();
             }
         }
 
