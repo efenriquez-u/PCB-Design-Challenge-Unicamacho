@@ -117,8 +117,15 @@
             right: 0;
             bottom: 0;
             background-image: 
-                radial-gradient(circle at 20% 50%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 193, 7, 0.1) 0%, transparent 50%);
+                linear-gradient(90deg, 
+                    rgba(0,255,0,0.05) 1px, 
+                    transparent 1px
+                ),
+                linear-gradient(0deg, 
+                    rgba(0,255,0,0.05) 1px, 
+                    transparent 1px
+                );
+            background-size: 20px 20px;
             pointer-events: none;
         }
 
@@ -130,9 +137,71 @@
             right: 0;
             bottom: 0;
             background-image: 
-                repeating-linear-gradient(0deg, transparent, transparent 100px, rgba(255, 193, 7, 0.03) 100px, rgba(255, 193, 7, 0.03) 101px),
-                repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(255, 193, 7, 0.03) 100px, rgba(255, 193, 7, 0.03) 101px);
+                radial-gradient(circle at 30% 30%, rgba(0,255,0,0.1) 0%, transparent 10px),
+                radial-gradient(circle at 70% 70%, rgba(0,255,0,0.1) 0%, transparent 10px),
+                radial-gradient(circle at 30% 70%, rgba(0,255,0,0.1) 0%, transparent 10px),
+                radial-gradient(circle at 70% 30%, rgba(0,255,0,0.1) 0%, transparent 10px),
+                radial-gradient(circle at 50% 50%, rgba(0,255,0,0.1) 0%, transparent 20px);
             pointer-events: none;
+        }
+
+        .pcb-title {
+            position: relative;
+            display: inline-block;
+            padding: 20px 40px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(0,255,0,0.2);
+            border-radius: 8px;
+        }
+
+        .pcb-title::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, transparent 48%, rgba(0,255,0,0.2) 49%, rgba(0,255,0,0.2) 51%, transparent 52%);
+            background-size: 10px 10px;
+            border-radius: 10px;
+            z-index: -1;
+        }
+
+        .pcb-date {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgba(0,255,0,0.1);
+            border: 2px solid rgba(0,255,0,0.2);
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .pcb-date::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ffc107;
+            border-radius: 50%;
+            top: 50%;
+            left: -4px;
+            transform: translateY(-50%);
+            box-shadow: 0 0 10px rgba(255,193,7,0.5);
+        }
+
+        .pcb-date::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ffc107;
+            border-radius: 50%;
+            top: 50%;
+            right: -4px;
+            transform: translateY(-50%);
+            box-shadow: 0 0 10px rgba(255,193,7,0.5);
         }
 
         /* Decoración de circuitos */
@@ -876,9 +945,11 @@
         </svg>
         
         <div class="container">
-            <h1>Concurso de Diseño de PCB's</h1>
-            <p class="subtitle">Diseño y Prototipado Electrónico</p>
-            <div class="event-date">Noviembre 2025</div>
+            <div class="pcb-title">
+                <h1>Concurso de Diseño de PCB's</h1>
+                <p class="subtitle">Diseño y Prototipado Electrónico</p>
+            </div>
+            <div class="pcb-date">4 - 5 de Noviembre, 2025</div>
         </div>
     </section>
 
