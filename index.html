@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concurso de Diseño de PCB's - UNIAJC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #ffffff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Principal */
+        .top-bar {
+            background: #003b96;
+            color: white;
+            padding: 12px 0;
+            font-size: 14px;
+        }
+
+        .top-bar .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-main {
+            background: white;
+            border-bottom: 4px solid #ffc107;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .header-main::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                #ffc107 0%, 
+                #ffc107 25%, 
+                transparent 25%, 
+                transparent 50%, 
+                #ffc107 50%, 
+                #ffc107 75%, 
+                transparent 75%);
+            background-size: 40px 4px;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-institucional {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-uniajc {
+            height: 60px;
+            width: auto;
+        }
+        
+        .logo-uniajc img {
+            height: 100%;
+            width: auto;
+        }
+
+        .logo-divider {
+            width: 2px;
+            height: 50px;
+            background: #ffc107;
+        }
+
+        .facultad {
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Banner del Evento */
+        .event-banner {
+            background: linear-gradient(135deg, #003b96 0%, #0052cc 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 193, 7, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .event-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 100px, rgba(255, 193, 7, 0.03) 100px, rgba(255, 193, 7, 0.03) 101px),
+                repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(255, 193, 7, 0.03) 100px, rgba(255, 193, 7, 0.03) 101px);
+            pointer-events: none;
+        }
+
+        /* Decoración de circuitos */
+        .circuit-decoration {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .circuit-top-left {
+            top: 20px;
+            left: 5%;
+        }
+
+        .circuit-top-right {
+            top: 20px;
+            right: 5%;
+        }
+
+        .circuit-bottom-left {
+            bottom: 20px;
+            left: 8%;
+        }
+
+        .circuit-bottom-right {
+            bottom: 20px;
+            right: 8%;
+        }
+
+        .event-banner .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .event-banner h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .event-banner .subtitle {
+            font-size: 22px;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+
+        .event-banner .event-date {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 12px 24px;
+            background: rgba(255, 193, 7, 0.2);
+            border: 2px solid #ffc107;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navegación por Tabs */
+        .tabs-nav {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tabs-nav .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .tab-button {
+            flex: 1;
+            max-width: 250px;
+            padding: 20px 24px;
+            background: white;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: #666;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .tab-button:hover {
+            background: #f8f9fa;
+            color: #003b96;
+        }
+
+        .tab-button.active {
+            color: #003b96;
+            border-bottom-color: #ffc107;
+            background: white;
+            font-weight: 600;
+        }
+
+        /* Contenido */
+        .content-section {
+            padding: 48px 0;
+            min-height: 400px;
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: #003b96;
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #ffc107;
+            display: inline-block;
+        }
+
+        .section-description {
+            color: #666;
+            font-size: 16px;
+            margin-top: 16px;
+        }
+
+        /* Tarjetas de Eventos */
+        .events-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .event-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            border-left: 5px solid #ffc107;
+            overflow: hidden;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background-image: 
+                radial-gradient(circle at 50% 50%, transparent 30%, rgba(0, 59, 150, 0.02) 30%, rgba(0, 59, 150, 0.02) 35%, transparent 35%),
+                repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(0, 59, 150, 0.02) 5px, rgba(0, 59, 150, 0.02) 6px);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .event-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .event-type-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .badge-icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        .badge-virtual {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge-presencial {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .event-card h3 {
+            font-size: 24px;
+            color: #003b96;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .event-card .description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .event-details {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            gap: 12px;
+            color: #555;
+            font-size: 15px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #333;
+            min-width: 90px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 12px 28px;
+            background: #003b96;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .btn-primary:hover {
+            background: #002a6b;
+            box-shadow: 0 4px 12px rgba(0,59,150,0.3);
+        }
+
+        /* Conferencias */
+        .conference-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .conference-item {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 8px;
+            border-left: 4px solid #003b96;
+        }
+
+        .conference-item h3 {
+            font-size: 20px;
+            color: #003b96;
+            margin-bottom: 12px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .conference-speaker {
+            color: #666;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .info-box {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin: 24px 0;
+        }
+
+        .info-box-title {
+            font-weight: 600;
+            color: #f57c00;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .info-box-content {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Documentos */
+        .documents-section {
+            background: #f8f9fa;
+            padding: 32px;
+            border-radius: 8px;
+        }
+
+        .document-item {
+            background: white;
+            padding: 20px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .document-info .name {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .document-info .date {
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* Sección de Objetivos */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .objective-card {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 8px;
+            border-top: 4px solid #ffc107;
+        }
+
+        .objective-card h4 {
+            color: #003b96;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .objective-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Información de Contacto */
+        .contact-box {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 28px;
+            border-radius: 8px;
+            margin-top: 32px;
+        }
+
+        .contact-box h4 {
+            color: #003b96;
+            margin-bottom: 16px;
+            font-size: 20px;
+        }
+
+        .contact-box p {
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        .contact-box strong {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .contact-box a {
+            color: #003b96;
+            text-decoration: none;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* Organizadores */
+        .organizers-section {
+            background: #f8f9fa;
+            padding: 48px 0;
+            margin-top: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .organizers-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 80px, rgba(0, 59, 150, 0.02) 80px, rgba(0, 59, 150, 0.02) 81px),
+                repeating-linear-gradient(-45deg, transparent, transparent 80px, rgba(0, 59, 150, 0.02) 80px, rgba(0, 59, 150, 0.02) 81px);
+            pointer-events: none;
+        }
+
+        .organizers-title {
+            text-align: center;
+            font-size: 28px;
+            color: #003b96;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .organizers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .organizer-card {
+            background: white;
+            padding: 32px 24px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+        }
+
+        .organizer-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+        }
+
+        .organizer-logo {
+            width: 100%;
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 12px;
+            object-fit: contain;
+        }
+
+        .organizer-logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #003b96;
+            margin-bottom: 8px;
+        }
+
+        .organizer-description {
+            font-size: 13px;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background: #003b96;
+            color: white;
+            padding: 40px 0;
+            margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(255, 193, 7, 0.05) 50px, rgba(255, 193, 7, 0.05) 51px),
+                repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255, 193, 7, 0.05) 50px, rgba(255, 193, 7, 0.05) 51px);
+            pointer-events: none;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .footer-subtitle {
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+
+        .footer-info {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo-uniajc {
+                height: 50px;
+            }
+            
+            .logo-divider {
+                display: none;
+            }
+            
+            .event-banner h1 {
+                font-size: 32px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+
+            .tabs-nav .container {
+                flex-direction: column;
+            }
+
+            .tab-button {
+                max-width: 100%;
+                border-bottom: 1px solid #e0e0e0;
+                border-left: 3px solid transparent;
+            }
+
+            .tab-button.active {
+                border-bottom-color: #e0e0e0;
+                border-left-color: #ffc107;
+            }
+
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra Superior -->
+    <div class="top-bar">
+        <div class="container">
+            <div>Institución Universitaria Antonio José Camacho</div>
+            <div>Cali, Valle del Cauca, Colombia</div>
+        </div>
+    </div>
+
+    <!-- Header Principal -->
+    <header class="header-main">
+        <div class="header-content">
+            <div class="logo-institucional">
+                <div class="logo-uniajc">
+                    <img src="logo-uniajc.png" alt="UNIAJC - Institución Universitaria Antonio José Camacho">
+                </div>
+                <div class="logo-divider"></div>
+                <div class="facultad">Facultad de Ingenierías</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner del Evento -->
+    <section class="event-banner">
+        <!-- Decoraciones de circuitos -->
+        <svg class="circuit-decoration circuit-top-left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+            <line x1="50" y1="10" x2="50" y2="42" stroke="currentColor" stroke-width="2"/>
+            <line x1="50" y1="58" x2="50" y2="90" stroke="currentColor" stroke-width="2"/>
+            <line x1="10" y1="50" x2="42" y2="50" stroke="currentColor" stroke-width="2"/>
+            <line x1="58" y1="50" x2="90" y2="50" stroke="currentColor" stroke-width="2"/>
+            <rect x="5" y="5" width="10" height="10" fill="currentColor"/>
+            <rect x="85" y="85" width="10" height="10" fill="currentColor"/>
+        </svg>
+        
+        <svg class="circuit-decoration circuit-top-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="40" width="60" height="20" fill="none" stroke="currentColor" stroke-width="2"/>
+            <line x1="20" y1="30" x2="20" y2="40" stroke="currentColor" stroke-width="2"/>
+            <line x1="80" y1="30" x2="80" y2="40" stroke="currentColor" stroke-width="2"/>
+            <line x1="20" y1="60" x2="20" y2="70" stroke="currentColor" stroke-width="2"/>
+            <line x1="80" y1="60" x2="80" y2="70" stroke="currentColor" stroke-width="2"/>
+            <circle cx="50" cy="50" r="5" fill="currentColor"/>
+        </svg>
+        
+        <svg class="circuit-decoration circuit-bottom-left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 30 20 L 30 50 L 70 50 L 70 80" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="30" cy="20" r="4" fill="currentColor"/>
+            <circle cx="30" cy="50" r="4" fill="currentColor"/>
+            <circle cx="70" cy="50" r="4" fill="currentColor"/>
+            <circle cx="70" cy="80" r="4" fill="currentColor"/>
+            <rect x="25" y="45" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        
+        <svg class="circuit-decoration circuit-bottom-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <line x1="20" y1="50" x2="40" y2="50" stroke="currentColor" stroke-width="2"/>
+            <rect x="40" y="40" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"/>
+            <line x1="60" y1="50" x2="80" y2="50" stroke="currentColor" stroke-width="2"/>
+            <line x1="50" y1="40" x2="50" y2="20" stroke="currentColor" stroke-width="2"/>
+            <line x1="50" y1="60" x2="50" y2="80" stroke="currentColor" stroke-width="2"/>
+            <circle cx="50" cy="50" r="3" fill="currentColor"/>
+        </svg>
+        
+        <div class="container">
+            <h1>Concurso de Diseño de PCB's</h1>
+            <p class="subtitle">Diseño y Prototipado Electrónico</p>
+            <div class="event-date">Noviembre 2025</div>
+        </div>
+    </section>
+
+    <!-- Navegación por Tabs -->
+    <nav class="tabs-nav">
+        <div class="container">
+            <button class="tab-button active" onclick="showTab('eventos')">Eventos</button>
+            <button class="tab-button" onclick="showTab('conferencias')">Conferencias</button>
+            <button class="tab-button" onclick="showTab('documentos')">Documentos</button>
+            <button class="tab-button" onclick="showTab('informacion')">Información</button>
+        </div>
+    </nav>
+
+    <!-- Contenido: Eventos -->
+    <div id="eventos" class="tab-content active">
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Calendario de Eventos</h2>
+                    <p class="section-description">Serie de capacitaciones y eventos relacionados con el diseño de PCB's</p>
+                </div>
+
+                <div class="events-grid">
+                    <!-- Evento 1 -->
+                    <div class="event-card">
+                        <span class="event-type-badge badge-virtual">
+                            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="8" cy="8" r="1.5" fill="currentColor"/>
+                                <circle cx="16" cy="8" r="1.5" fill="currentColor"/>
+                                <circle cx="8" cy="16" r="1.5" fill="currentColor"/>
+                                <circle cx="16" cy="16" r="1.5" fill="currentColor"/>
+                                <path d="M8 8 L16 8 M16 8 L16 16 M16 16 L8 16 M8 16 L8 8" stroke="currentColor" stroke-width="1"/>
+                            </svg>
+                            Virtual
+                        </span>
+                        <h3>Capacitación Virtual</h3>
+                        <p class="description">Capacitación en modalidad virtual sobre diseño y prototipado electrónico</p>
+                        <div class="event-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Fecha:</span>
+                                <span>Jueves 30 de Octubre de 2025</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Hora:</span>
+                                <span>4:00 PM - 5:30 PM</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Modalidad:</span>
+                                <span>Microsoft Teams</span>
+                            </div>
+                        </div>
+                        <a href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_YTFhY2Q1ZDEtNGUxYy00ZDJiLTg1YjctNjU5ZjdkZTg1OThm%40thread.v2/0?context=%7b%22Tid%22%3a%22e5f9325c-db40-4442-bc56-4e84dc4947d6%22%2c%22Oid%22%3a%228d29f78a-d820-45ea-9115-c270c040abea%22%7d" target="_blank" class="btn-primary">Unirse a la Reunión</a>
+                    </div>
+
+                    <!-- Evento 2 -->
+                    <div class="event-card">
+                        <span class="event-type-badge badge-virtual">
+                            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="8" cy="8" r="1.5" fill="currentColor"/>
+                                <circle cx="16" cy="8" r="1.5" fill="currentColor"/>
+                                <circle cx="8" cy="16" r="1.5" fill="currentColor"/>
+                                <circle cx="16" cy="16" r="1.5" fill="currentColor"/>
+                                <path d="M8 8 L16 8 M16 8 L16 16 M16 16 L8 16 M8 16 L8 8" stroke="currentColor" stroke-width="1"/>
+                            </svg>
+                            Virtual
+                        </span>
+                        <h3>Capacitación en Altium</h3>
+                        <p class="description">Capacitación en Altium ofrecido por Microcircuitos</p>
+                        <div class="event-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Fecha:</span>
+                                <span>Viernes 31 de Octubre de 2025</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Hora:</span>
+                                <span>10:00 AM - 12:00 M</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Modalidad:</span>
+                                <span>Microsoft Teams</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Instructor:</span>
+                                <span>Ing. Camilo Polo</span>
+                            </div>
+                        </div>
+                        <a href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_NzQyNWFmMGEtYzE1MS00NzA2LTllY2YtM2E3NTAwNTRhNWMw%40thread.v2/0?context=%7b%22Tid%22%3a%22e5f9325c-db40-4442-bc56-4e84dc4947d6%22%2c%22Oid%22%3a%228d29f78a-d820-45ea-9115-c270c040abea%22%7d" target="_blank" class="btn-primary">Unirse a la Reunión</a>
+                    </div>
+
+                    <!-- Evento 3 -->
+                    <div class="event-card">
+                        <span class="event-type-badge badge-presencial">
+                            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="7" width="18" height="12" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <line x1="3" y1="11" x2="21" y2="11" stroke="currentColor" stroke-width="2"/>
+                                <line x1="8" y1="7" x2="8" y2="19" stroke="currentColor" stroke-width="2"/>
+                                <line x1="16" y1="7" x2="16" y2="19" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="5.5" cy="9" r="0.5" fill="currentColor"/>
+                                <circle cx="12" cy="15" r="1" fill="currentColor"/>
+                            </svg>
+                            Presencial
+                        </span>
+                        <h3>Capacitación en Normas IPC</h3>
+                        <p class="description">Capacitación presencial en normas IPC para diseño de PCB</p>
+                        <div class="event-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Fecha:</span>
+                                <span>Martes 4 de Noviembre de 2025</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Hora:</span>
+                                <span>3:00 PM - 6:00 PM</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Lugar:</span>
+                                <span>Multisala 2, Sede Principal</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Dirección:</span>
+                                <span>Avenida 6N No 28N-102, Cali</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Evento 4 -->
+                    <div class="event-card">
+                        <span class="event-type-badge badge-presencial">
+                            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="7" width="18" height="12" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <line x1="3" y1="11" x2="21" y2="11" stroke="currentColor" stroke-width="2"/>
+                                <line x1="8" y1="7" x2="8" y2="19" stroke="currentColor" stroke-width="2"/>
+                                <line x1="16" y1="7" x2="16" y2="19" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="5.5" cy="9" r="0.5" fill="currentColor"/>
+                                <circle cx="12" cy="15" r="1" fill="currentColor"/>
+                            </svg>
+                            Presencial
+                        </span>
+                        <h3>Concurso de Diseño de PCB's</h3>
+                        <p class="description">Concurso de diseño de PCB's con participación limitada</p>
+                        <div class="event-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Fecha:</span>
+                                <span>Martes 5 de Noviembre de 2025</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Hora:</span>
+                                <span>6:00 PM</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Lugar:</span>
+                                <span>Multisala 2, Unicamacho Norte</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Cupos:</span>
+                                <span>15 participantes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contenido: Conferencias -->
+    <div id="conferencias" class="tab-content">
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Conferencias</h2>
+                    <p class="section-description">Charlas técnicas sobre diseño y prototipado electrónico</p>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-box-title">Información General</div>
+                    <div class="info-box-content">
+                        <strong>Fecha:</strong> 5 de Noviembre de 2025<br>
+                        <strong>Hora:</strong> 4:00 PM<br>
+                        <strong>Lugar:</strong> Por confirmar
+                    </div>
+                </div>
+
+                <div class="conference-list">
+                    <div class="conference-item">
+                        <h3>Proyecto de ley y perspectivas de la industria Electrónica y de semiconductores en Colombia y Latinoamérica</h3>
+                        <p class="conference-speaker">Lorena García - Directora RedCEyS</p>
+                    </div>
+
+                    <div class="conference-item">
+                        <h3>Normas IPC para diseño de PCB: importancia para la industria y la academia</h3>
+                        <p class="conference-speaker">Andre Laverde - Aldelta Technologies</p>
+                    </div>
+
+                    <div class="conference-item">
+                        <h3>Caso empresarial Microcircuitos-Cali</h3>
+                        <p class="conference-speaker">Representante Microcircuitos</p>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top: 32px;">
+                    <div class="info-box-content">
+                        Estas conferencias ofrecerán perspectivas únicas sobre el estado actual y futuro de la industria 
+                        electrónica en Colombia y Latinoamérica, las mejores prácticas en diseño de PCB según normas 
+                        internacionales, y casos de éxito empresarial en la región.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contenido: Documentos -->
+    <div id="documentos" class="tab-content">
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Documentos y Recursos</h2>
+                    <p class="section-description">Material de apoyo y presentaciones del evento</p>
+                </div>
+
+                <div class="documents-section">
+                    <h3 style="margin-bottom: 20px; color: #003b96;">Materiales Disponibles</h3>
+                    <p style="color: #666; margin-bottom: 24px;">
+                        Aquí encontrarás las presentaciones, material de apoyo y recursos compartidos durante el evento.
+                    </p>
+
+                    <div class="document-item">
+                        <div class="document-info">
+                            <div class="name">Documento de ejemplo.pdf</div>
+                            <div class="date">Actualizado: 30/10/2025</div>
+                        </div>
+                        <a href="#" class="btn-primary" style="padding: 8px 20px; font-size: 14px;">Descargar</a>
+                    </div>
+
+                    <div class="info-box" style="margin-top: 24px;">
+                        <div class="info-box-content">
+                            Los documentos y enlaces de las conferencias se actualizarán conforme se desarrollen los eventos.
+                            Revisa esta sección regularmente para acceder al material más reciente.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contenido: Información -->
+    <div id="informacion" class="tab-content">
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Información General</h2>
+                    <p class="section-description">Conoce más sobre el evento</p>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-box-title">Sobre el Evento</div>
+                    <div class="info-box-content">
+                        El Concurso de Diseño de PCB's es una iniciativa de la Facultad de Ingenierías de la 
+                        Institución Universitaria Antonio José Camacho (UNIAJC) que busca promover el desarrollo 
+                        de competencias en diseño y prototipado electrónico entre estudiantes y profesionales.
+                    </div>
+                </div>
+
+                <h3 style="color: #003b96; margin: 32px 0 24px; font-size: 24px;">Objetivos</h3>
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <h4>Capacitación Técnica</h4>
+                        <p>Fortalecer conocimientos en diseño de PCB según normas internacionales</p>
+                    </div>
+                    <div class="objective-card">
+                        <h4>Perspectiva Industrial</h4>
+                        <p>Conocer las perspectivas de la industria electrónica en Colombia y Latinoamérica</p>
+                    </div>
+                    <div class="objective-card">
+                        <h4>Desarrollo Práctico</h4>
+                        <p>Desarrollar habilidades prácticas en software especializado (Altium)</p>
+                    </div>
+                    <div class="objective-card">
+                        <h4>Networking</h4>
+                        <p>Conectar con empresas y profesionales del sector</p>
+                    </div>
+                </div>
+
+                <div class="contact-box">
+                    <h4>Información de Contacto</h4>
+                    <p><strong>Institución:</strong> Universidad Antonio José Camacho</p>
+                    <p><strong>Facultad:</strong> Facultad de Ingenierías</p>
+                    <p><strong>Email:</strong> <a href="mailto:mercadeo@admon.uniajc.edu.co">mercadeo@admon.uniajc.edu.co</a></p>
+                    <p><strong>Teléfono:</strong> +57 2 6652828</p>
+                    <p><strong>Sitio Web:</strong> <a href="https://www.uniajc.edu.co" target="_blank">www.uniajc.edu.co</a></p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Organizadores -->
+    <section class="organizers-section">
+        <div class="container">
+            <h2 class="organizers-title">Organizadores y Colaboradores</h2>
+            <div class="organizers-grid">
+                <div class="organizer-card">
+                    <img src="logo-uniajc.png" alt="UNIAJC" class="organizer-logo">
+                    <p class="organizer-description">Institución Universitaria</p>
+                </div>
+                <div class="organizer-card">
+                    <img src="logo-aldelta.png" alt="Aldelta Technologies" class="organizer-logo">
+                    <p class="organizer-description">Normas IPC & Certificación</p>
+                </div>
+                <div class="organizer-card">
+                    <div class="organizer-logo-text">Microcircuitos</div>
+                    <p class="organizer-description">Fabricación de PCB</p>
+                </div>
+                <div class="organizer-card">
+                    <img src="logo-redceys.png" alt="RedCEyS" class="organizer-logo" style="max-width: 200px;">
+                    <p class="organizer-description">Red Colombiana de Electrónica</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-title">Institución Universitaria Antonio José Camacho</div>
+            <div class="footer-subtitle">Facultad de Ingenierías</div>
+            <div class="footer-info">
+                <p>Cali, Valle del Cauca, Colombia</p>
+                <p>© 2025 UNIAJC - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showTab(tabName) {
+            // Ocultar todos los contenidos
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remover clase active de todos los botones
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Mostrar el contenido seleccionado
+            document.getElementById(tabName).classList.add('active');
+            
+            // Agregar clase active al botón clickeado
+            event.currentTarget.classList.add('active');
+
+            // Scroll suave al inicio del contenido
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
