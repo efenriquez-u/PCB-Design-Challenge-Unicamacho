@@ -1018,6 +1018,23 @@
             border-radius: 8px;
             border: 1px solid #e0e0e0;
         }
+        /* Wrapper responsive para iframes (16:9 por defecto) */
+        .responsive-iframe-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .responsive-iframe-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
     </style>
 </head>
 <body>
@@ -1548,7 +1565,10 @@
 
         // Función específica para abrir la grabación de la Capacitación en Altium
         function openAltiumVideo() {
-            const iframeHtml = '<iframe src="https://admonuniajcedu-my.sharepoint.com/personal/ingelectronica_admon_uniajc_edu_co/_layouts/15/embed.aspx?UniqueId=518fc215-4f45-465f-9084-b123dda5d830&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="853" height="480" frameborder="0" scrolling="no" allowfullscreen title="Capacitación en Altium ofrecido por microcircuitos-20251031_100956-Grabación de la reunión.mp4"></iframe>';
+            const iframeHtml = '<div class="responsive-iframe-wrapper">' +
+                '<iframe src="https://admonuniajcedu-my.sharepoint.com/personal/ingelectronica_admon_uniajc_edu_co/_layouts/15/embed.aspx?UniqueId=518fc215-4f45-465f-9084-b123dda5d830&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" allowfullscreen title="Capacitación en Altium ofrecido por microcircuitos-20251031_100956-Grabación de la reunión.mp4"></iframe>' +
+                '</div>';
+
             const contentHtml = '<div class="video-content">' +
                 '<div class="video-icon" style="margin-bottom:12px;">' +
                     '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
